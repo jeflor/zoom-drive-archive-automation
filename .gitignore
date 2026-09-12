@@ -1,0 +1,27 @@
+# ---- SECRETS: never commit ----
+config.py
+credentials.json
+token.json
+secrets.txt
+*key*.json
+.env
+*.pem
+
+# ---- environment ----
+venv/
+.venv/
+.tvenv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# ---- generated output ----
+# Reconciliation/dedupe runs write back into their data dir.
+data/
+exports/
+*.xlsx
+dashboard/dashboard_snapshot.html
+fixtures/reconciliation.csv
+fixtures/reconciliation.json
+fixtures/dedupe_plan.xlsx

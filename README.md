@@ -1,9 +1,9 @@
 # Zoom → Google Drive archive pipeline
 
 **Eliminated a recurring $1,000+/month Zoom storage bill by migrating 3+ TB of
-cloud recordings into storage the business already owned — without losing a
-single recording — then replaced the migration with an automated lifecycle so
-the problem does not come back.**
+cloud recordings into storage the business already owned, with zero recordings
+lost, then replaced the migration with an automated lifecycle so the problem does
+not come back.**
 
 A client's Zoom account had accumulated roughly **1,800 cloud meeting
 recordings** over three years. Storage was **122% over its 1 TB cap**, the
@@ -35,8 +35,8 @@ migration that silently rots the moment someone records a new meeting.
 
 > **About this repository.** This is a sanitized portfolio copy of production
 > tooling. Account names, meeting titles, folder ids and project ids have been
-> replaced with placeholders, and the real Zoom/Drive indexes — which describe
-> private meetings — are replaced by [generated fixtures](#fixtures) that match
+> replaced with placeholders, and the real Zoom/Drive indexes, which describe
+> private meetings, are replaced by [generated fixtures](#fixtures) that match
 > the original schemas exactly. The code, architecture and engineering decisions
 > are unchanged.
 
@@ -46,8 +46,8 @@ migration that silently rots the moment someone records a new meeting.
 
 - [What this project demonstrates](#what-this-project-demonstrates)
 - [Problem](#problem)
-- [Process — establishing ground truth](#process--establishing-ground-truth)
-- [Automation — from laptop to pipeline](#automation--from-laptop-to-pipeline)
+- [Process: establishing ground truth](#process-establishing-ground-truth)
+- [Automation: from laptop to pipeline](#automation-from-laptop-to-pipeline)
 - [API integrations](#api-integrations)
 - [Testing](#testing)
 - [Results](#results)
@@ -58,7 +58,7 @@ migration that silently rots the moment someone records a new meeting.
 
 ## Problem
 
-The brief sounded simple — "back up the Zoom recordings and delete them to get
+The brief sounded simple: "back up the Zoom recordings and delete them to get
 under the cap." The business case was equally simple: Zoom storage overage was
 costing **$1,000+/month** on a recurring basis, while Google Workspace storage
 the client already paid for sat **115+ TB empty**. Every month of delay was
@@ -69,7 +69,7 @@ Five things made it hard:
 **1. Deletion is irreversible, and the existing evidence was wrong.**
 An earlier cleanup had verified backups against the *Google Drive Desktop local
 cache*. That cache reports partially-synced files at their partial size, so it
-declared good backups corrupt and — far worse — could declare an incomplete
+declared good backups corrupt and, far worse, could declare an incomplete
 upload complete. Any tool built on that premise could permanently destroy
 recordings. Ground truth had to be re-established from scratch.
 
@@ -84,7 +84,7 @@ recording would actually reclaim:
 | Largest video layout per meeting + audio | ~314 GB |
 | Zoom **billed** storage (`accounts/me/plans/usage`) | **335 GB** |
 
-Zoom renders every meeting into five or six downloadable layouts — speaker view,
+Zoom renders every meeting into five or six downloadable layouts: speaker view,
 gallery view, shared screen, and combinations. All are real files the API will
 hand you, but the billed figure tracks roughly **one layout per meeting**. So
 deleting the remaining media would reclaim ~300 GB of *billed* storage, not
@@ -95,7 +95,7 @@ either direction meant either a useless cleanup or a lost archive.
 folders re-uploaded under variant names. Deduplicating it was its own project.
 
 **4. Some recordings refused to delete.** A subset returned Zoom API error 3332
-— *"being used for Zoom IQ for Sales"* — even though that AI feature's
+, *"being used for Zoom IQ for Sales"*, even though that AI feature's
 subscription had been cancelled and its UI was gone.
 
 **5. A one-time migration would not have solved it.** Even a flawless manual
@@ -106,7 +106,7 @@ months. The deliverable had to be a running process, not a completed task.
 
 ---
 
-## Process — establishing ground truth
+## Process: establishing ground truth
 
 The guiding rule, which every tool in this repository enforces:
 
@@ -115,7 +115,7 @@ The guiding rule, which every tool in this repository enforces:
 "Proving" needed a definition. Zoom does not expose a checksum for cloud
 recording files, so the strongest pre-download signal is the **exact byte
 length** Zoom reports, compared against the true byte length read back from the
-**Drive API** — never from a local sync cache.
+**Drive API**, never from a local sync cache.
 
 The pipeline is three read-only passes, then a gated write:
 
@@ -149,7 +149,7 @@ failure:
 media files that happen to be the same byte length, the archive must contain
 *two* files of that length. Matching against a set would have cleared such a
 meeting for deletion while one of its files had never been uploaded. Matches are
-consumed as they are made — [`verification.py`](zoomarchive/verification.py).
+consumed as they are made. See [`verification.py`](zoomarchive/verification.py).
 
 **`PARTIAL` is a first-class verdict.** A meeting with some media archived and
 some missing is the genuinely dangerous case, and it is never auto-deleted. It
@@ -165,10 +165,10 @@ was removed.
 **Dedup is safe by construction, and the assertion is checked before execution.**
 Drive *does* expose MD5s, so dedup could be exact: keep one copy per MD5.
 The plan asserts that no unique file loses every copy before anything is
-trashed. The first draft of that plan would have orphaned **179 files** — the
+trashed. The first draft of that plan would have orphaned **179 files**, and the
 assertion is what caught it. Keeper preference goes to the copy in the most
 complete folder, so redundant partial folders empty out cleanly instead of
-leaving strays behind — [`dedupe.py`](zoomarchive/dedupe.py).
+leaving strays behind. See [`dedupe.py`](zoomarchive/dedupe.py).
 
 Deletions are also **soft** on both sides: Zoom trash and Drive trash each
 retain items for ~30 days, so the whole operation had a rollback window.
@@ -177,29 +177,29 @@ retain items for ~30 days, so the whole operation had a rollback window.
 
 134 recordings (268 once recent recordings were attempted) could not be deleted
 through the per-file API. Zoom returned error 3332, *"being used for Zoom IQ for
-Sales"* — Zoom's AI sales-intelligence product, whose subscription had already
+Sales"*, Zoom's AI sales-intelligence product, whose subscription had already
 been cancelled and whose UI was gone from the account. Zoom support confirmed a
 **bug in the per-file delete endpoint** and advised deleting all 268 by hand
 through the web portal.
 
-Reading the API surface more closely turned up a different endpoint —
+Reading the API surface more closely turned up a different endpoint,
 `DELETE /meetings/{uuid}/recordings`, which deletes a meeting's recordings as a
 unit and is a **separate code path that doesn't hit the bug**. All 267 were then
 deleted automatically. Because that endpoint removes the entire meeting
 including its transcript, it is used *only* where the media *and* transcripts
-were already verified in Drive — [`whole_meeting_delete.py`](scripts/whole_meeting_delete.py).
+were already verified in Drive. See [`whole_meeting_delete.py`](scripts/whole_meeting_delete.py).
 
 This turned roughly a day of manual portal clicking into a gated, logged,
 resumable run.
 
 ---
 
-## Automation — from laptop to pipeline
+## Automation: from laptop to pipeline
 
 ### Why it had to leave the laptop
 
-Measured from the workstation: ~5–6 MB/s from Zoom, ~4.5 MB/s to Drive.
-Parallelism didn't help — the local uplink (~36–51 Mbps) was the ceiling, not
+Measured from the workstation: ~5-6 MB/s from Zoom, ~4.5 MB/s to Drive.
+Parallelism didn't help: the local uplink (~36-51 Mbps) was the ceiling, not
 per-connection throttling. At that rate the remaining ~914 GB backfill was
 several days of a machine that couldn't sleep, and long transfers kept dying on
 connection drops.
@@ -215,7 +215,7 @@ regardless of recording size.
 ### The steady-state pipeline
 
 Clearing the backlog fixed the bill once. Keeping it fixed meant the same
-guarantees had to run on every future recording with nobody in the loop — so the
+guarantees had to run on every future recording with nobody in the loop, so the
 verification gate was wired into an event-driven pipeline with no local machine
 involved. This is the part that turns a one-time saving into a permanent one:
 
@@ -223,23 +223,23 @@ involved. This is the part that turns a one-time saving into a permanent one:
  Zoom: recording.completed
           │ (webhook, HMAC-signed)
           ▼
- ┌──────────────────┐   Cloud Run service — verifies the signature,
+ ┌──────────────────┐   Cloud Run service: verifies the signature,
  │  zoom-webhook    │   triggers the job, returns 200 fast so Zoom
  └────────┬─────────┘   doesn't retry
           │
           ▼
  ┌──────────────────┐   Cloud Run job, three modes:
- │  zoom-autobackup │     sweep  — daily: back up + verify + delete (7-day window)
- └────────┬─────────┘     single — one meeting, fired by the webhook
-          │               gap    — size-matched backfill of old partials, no delete
+ │  zoom-autobackup │     sweep:  daily back up + verify + delete (7-day window)
+ └────────┬─────────┘     single: one meeting, fired by the webhook
+          │               gap:    size-matched backfill of old partials, no delete
           ▼
- ┌──────────────────┐   Cloud Run service — token-gated. Headline metric is a
+ ┌──────────────────┐   Cloud Run service: token-gated. Headline metric is a
  │  zoom-dashboard  │   live Zoom→Drive reconciliation: "Unbacked in Zoom".
  └──────────────────┘   0 = everything is archived, right now.
 ```
 
 Plus **Cloud Scheduler** for cadence: the sweep every 3 hours and a dashboard
-refresh hourly, both restricted to 9am–9pm Eastern so nothing runs against an
+refresh hourly, both restricted to 9am-9pm Eastern so nothing runs against an
 idle account overnight.
 
 The dashboard's design choice worth calling out: rather than reporting what the
@@ -247,7 +247,7 @@ pipeline *believes* it did from its own logs, it re-derives the answer from both
 APIs on every refresh and shows the reconciliation itself. A log can be
 confidently wrong; a live reconciliation against both sources cannot be. A
 standalone [`local_snapshot.py`](dashboard/local_snapshot.py) renders the same
-view to static HTML with no GCP dependency — which is what made the outage below
+view to static HTML with no GCP dependency, which is what made the outage below
 survivable.
 
 ### Operating it: a billing outage
@@ -258,11 +258,11 @@ piled up in Zoom.
 
 Recovery is in the repository because it exposed a real operational gap:
 **re-enabling billing does not redeploy suspended revisions**, so relinking the
-project was necessary but not sufficient — the services had to be explicitly
+project was necessary but not sufficient: the services had to be explicitly
 redeployed. A catch-up sweep then ran with the window widened from 7 to 14 days
 (13 meetings, 6.7 GB backed up, 12 media files trashed) before reverting to the
 daily cadence. The live reconciliation confirmed **0 unbacked** across the entire
-gap — which is precisely the question a log-based dashboard could not have
+gap, which is precisely the question a log-based dashboard could not have
 answered after a 12-day blackout.
 
 ### Edge case: per-participant audio
@@ -289,21 +289,21 @@ them through the same byte-gated path as everything else.
 | Read the **billed** storage figure | `billing:read:plan_usage:admin` |
 | Registrant administration | `meeting:delete:registrant:admin` |
 
-**Zoom webhooks** — `recording.completed`, with endpoint URL validation and
+**Zoom webhooks.** `recording.completed`, with endpoint URL validation and
 HMAC-SHA256 event signatures computed over `v0:{timestamp}:{raw body}`. The
 signature covers the *raw* bytes, so it must be verified before the JSON is
-re-serialised — a detail that is easy to get wrong and is
+re-serialised, a detail that is easy to get wrong and is
 [covered by tests](tests/test_webhook_auth.py).
 See [`webhook/auth.py`](webhook/auth.py).
 
-**Google Drive API v3** — shared-drive support throughout
+**Google Drive API v3.** Shared-drive support throughout
 (`supportsAllDrives`, `corpora=allDrives`), chunked resumable uploads, and MD5
 checksums for dedup. Backfill throughput is capped by Drive's **per-user** write
 rate limit, since all writes go through a single OAuth user, so the job runs at
 modest concurrency with exponential backoff on Drive 403s. Media retries hard;
 tiny metadata files fail fast so they can never stall a run.
 
-**Google Cloud** — Cloud Run jobs and services, Cloud Scheduler, Secret Manager
+**Google Cloud.** Cloud Run jobs and services, Cloud Scheduler, Secret Manager
 for the Drive refresh token, and the Cloud Run Admin API for job triggering with
 per-invocation environment overrides.
 
@@ -311,12 +311,12 @@ per-invocation environment overrides.
 shaped this project from the outside. Zoom IQ for Sales held 267 recordings
 hostage through a delete-API bug long after it was cancelled. And Zoom's
 AI-generated meeting summaries and transcripts were treated as first-class
-assets to preserve — which is the specific reason every deletion is media-only
+assets to preserve, which is the specific reason every deletion is media-only
 and why the whole-meeting endpoint is restricted to meetings whose transcripts
 are already verified in Drive.
 
 **On how this was built.** The tooling was developed in an agentic AI coding
-workflow (Claude Code) against live APIs — which is also why the safety
+workflow (Claude Code) against live APIs, which is also why the safety
 architecture looks the way it does. When code that can irreversibly delete a
 client's data is being generated quickly, the interesting engineering moves into
 the verification gates, the pre-execution assertions, the dry-run modes and the
@@ -349,8 +349,8 @@ These ran against live data and each one caught a real bug:
 
 ### Unit tests
 
-The pure decision logic — the rules that decide whether data may be deleted —
-lives in [`zoomarchive/`](zoomarchive/) with no I/O, no network and no
+The pure decision logic, meaning the rules that decide whether data may be
+deleted, lives in [`zoomarchive/`](zoomarchive/) with no I/O, no network and no
 credentials, so it can be tested directly. The scripts do the I/O and call in
 for the verdict.
 
@@ -391,7 +391,7 @@ and confirming the suite goes red:
 | **Storage** | **122% over** the 1 TB cap → **34.7 GB of 1 TB**, inside the free tier |
 | **Migrated** | **3+ TB** of recordings into Google Workspace capacity already paid for (115+ TB free) |
 | **Recordings lost** | **0** |
-| **Ongoing manual work** | **none** — event-driven pipeline, not a one-time migration |
+| **Ongoing manual work** | **none**. Event-driven pipeline, not a one-time migration |
 
 The cost line is the headline, but the last line is the one that makes it hold.
 A manual migration would have bought a few months before new recordings pushed
@@ -400,15 +400,15 @@ recording is now archived, verified and cleared from Zoom automatically, the
 saving is permanent rather than deferred.
 
 The second-order win: the destination was capacity the client was **already
-paying for**. The project did not trade one bill for another — it moved data
-from metered storage into 115+ TB of unused Workspace allocation.
+paying for**. The project did not trade one bill for another. It moved data from
+metered storage into 115+ TB of unused Workspace allocation.
 
 ### Engineering results
 
 | | |
 |---|---|
 | Meetings verified backed up | 1,542 |
-| Media reclaimed from Zoom (round 1) | ~961 GB across 5,912 files — transcripts kept |
+| Media reclaimed from Zoom (round 1) | ~961 GB across 5,912 files (transcripts kept) |
 | Redundant Drive copies removed | 4,581 files, ~1,169 GB |
 | Later deletion rounds | ~878 files, ~328 GB |
 | Error-3332 meetings cleared automatically | **267 meetings, 585 GB** |
@@ -416,16 +416,16 @@ from metered storage into 115+ TB of unused Workspace allocation.
 | Unbacked recordings in Zoom | **0**, confirmed by live reconciliation |
 | Unit tests over the deletion logic | 39, passing |
 
-Deletions were soft on both sides — Zoom trash and Drive trash each retain items
-~30 days — so the entire operation ran with a rollback window rather than on
-faith.
+Deletions were soft on both sides (Zoom trash and Drive trash each retain items
+for roughly 30 days), so the entire operation ran with a rollback window rather
+than on faith.
 
 ---
 
 ## Repository layout
 
 ```
-zoomarchive/     pure decision logic — the deletion gate, dedup planning, naming.
+zoomarchive/     pure decision logic: the deletion gate, dedup planning, naming.
                  No I/O. Unit-tested.
 scripts/         local analysis + operations tooling (see below)
 cloud/           Cloud Run job: bulk Zoom → Drive backfill, chunked + byte-verified
@@ -462,7 +462,7 @@ tests/           pytest suite over zoomarchive/ and webhook/auth.py
 
 Adding a passcode to a registration-enabled meeting **rotates every
 registrant's join link**. If `registrants_email_notification` is on, saving that
-edit emails every registrant their new link — with no confirmation prompt; the
+edit emails every registrant their new link, with no confirmation prompt. The
 toggle alone decides. That toggle can only be changed with a `meeting:update`
 scope.
 
@@ -509,7 +509,7 @@ python3 scripts/storage_breakdown.py
 ```
 
 `reconcile.py` on the fixtures produces the same shape of verdict the real run
-did, and `storage_breakdown.py` reproduces the layout-duplication finding —
+did, and `storage_breakdown.py` reproduces the layout-duplication finding:
 155 GB of files against 72 GB if only the largest layout per meeting were
 billed, the same ~2x effect that explained the real account's numbers.
 
@@ -520,4 +520,4 @@ Scripts that talk to a live API are read-only by default or require
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).

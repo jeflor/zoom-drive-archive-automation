@@ -1,0 +1,404 @@
+[
+ {
+  "uuid": "SVBwCuEeXbhS8zpLtDi23A==",
+  "host": "archive@example.com",
+  "date": "2026-04-08",
+  "topic": "Quarterly Strategy Review",
+  "drive_folder": "/archive@example.com/2026-04-08 Quarterly Strategy Review",
+  "files": [
+   {
+    "id": "71ff20da-c346-7d35-4d72-feebc5d5ce8a",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 756103475
+   },
+   {
+    "id": "dff037b0-3de3-78ed-55fb-f129d73167b1",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 423965863
+   },
+   {
+    "id": "eeef487e-a3cb-a87f-45a4-1d24e0e429eb",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1920333882
+   },
+   {
+    "id": "a8cda97d-7ff9-f26d-6bc3-7f1fba7b79b5",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 52589107
+   }
+  ]
+ },
+ {
+  "uuid": "iRgB3yGcvbtiWMK1OXKR0g==",
+  "host": "training@example.com",
+  "date": "2026-08-11",
+  "topic": "Office Hours",
+  "drive_folder": "/training@example.com/2026-08-11 Office Hours",
+  "files": [
+   {
+    "id": "3a7c9c70-ed01-a4c5-6c20-3b7e6cd20324",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 1636892954
+   },
+   {
+    "id": "ec346b0d-6e71-00f1-112f-37a6b15c889b",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 1120613529
+   },
+   {
+    "id": "6fd8be59-92f7-d014-c39d-afaf9f523dd8",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 18412612
+   }
+  ]
+ },
+ {
+  "uuid": "8ILQgBQMsjCGjFCXEMStHQ==",
+  "host": "media@example.com",
+  "date": "2026-09-03",
+  "topic": "Office Hours",
+  "drive_folder": "/media@example.com/2026-09-03 Office Hours",
+  "files": [
+   {
+    "id": "55056f69-1e32-d877-c22f-c5fc4ed2a890",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 679078804
+   },
+   {
+    "id": "2bbc25c1-3206-cf21-ef7d-9fa1db1a0f04",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 544579655
+   },
+   {
+    "id": "8e636665-ad67-42d8-9bc7-786030098d71",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 34089474
+   }
+  ]
+ },
+ {
+  "uuid": "bjj/irOZqnRkUILWEoXscQ==",
+  "host": "archive@example.com",
+  "date": "2026-02-20",
+  "topic": "Weekly Team Q&A",
+  "drive_folder": "/archive@example.com/2026-02-20 Weekly Team Q&A",
+  "files": [
+   {
+    "id": "1cfed481-560b-c125-1e2f-6eb63c3f4bc2",
+    "recording_type": "active_speaker",
+    "file_type": "MP4",
+    "size": 2114211270
+   },
+   {
+    "id": "70341d95-2787-7000-e970-344bb51597f6",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 2348922751
+   },
+   {
+    "id": "7d8a99ff-a7e5-8b5c-fd61-478d00457de7",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 2040687002
+   },
+   {
+    "id": "86133b1f-ab28-66b1-3e80-50e6ab49e7fd",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 1117905637
+   },
+   {
+    "id": "6d0db289-0d79-8eb1-5909-a13510227b23",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 83550531
+   }
+  ]
+ },
+ {
+  "uuid": "++qZO1tWxrkL2K507Tnnvg==",
+  "host": "archive@example.com",
+  "date": "2026-06-21",
+  "topic": "3-Day Virtual Workshop",
+  "drive_folder": "/archive@example.com/2026-06-21 3-Day Virtual Workshop",
+  "files": [
+   {
+    "id": "4e708abf-23be-9e04-c6a9-665d0997076e",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 779598333
+   },
+   {
+    "id": "014af313-7394-8869-3268-2ff84223c7f7",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 875412198
+   },
+   {
+    "id": "976b4e9e-181c-675f-f9eb-5306da48a3df",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 52278829
+   }
+  ]
+ },
+ {
+  "uuid": "Bo7rLa6/iJ4u2TWJs8Rnew==",
+  "host": "training@example.com",
+  "date": "2026-04-22",
+  "topic": "Quarterly Strategy Review",
+  "drive_folder": "/training@example.com/2026-04-22 Quarterly Strategy Review",
+  "files": [
+   {
+    "id": "9cea4dcb-1017-f406-a1c0-fd90040d35ce",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 1328247302
+   },
+   {
+    "id": "ada4c84f-3c26-2372-c381-d351d66eac7f",
+    "recording_type": "active_speaker",
+    "file_type": "MP4",
+    "size": 2385519008
+   },
+   {
+    "id": "d9058311-c928-6e61-60ac-dafab16b4b77",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 2031477444
+   },
+   {
+    "id": "6952b9eb-3641-7a83-ad82-19ef15d6e232",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 2145729439
+   },
+   {
+    "id": "1c5b4c0a-2a48-e748-c853-8b236a722df8",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 21375193
+   }
+  ]
+ },
+ {
+  "uuid": "jK1kF5OF3oZ/G8ZYr2GStA==",
+  "host": "media@example.com",
+  "date": "2026-08-09",
+  "topic": "Member Onboarding Walkthrough",
+  "drive_folder": "/media@example.com/2026-08-09 Member Onboarding Walkthrough",
+  "files": [
+   {
+    "id": "75a31f18-38aa-c0c4-d73c-f3bd5df4b03c",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1624530397
+   },
+   {
+    "id": "f0f9044e-20e9-f9f1-b444-05c2207e58b4",
+    "recording_type": "active_speaker",
+    "file_type": "MP4",
+    "size": 1360964438
+   },
+   {
+    "id": "bcdb01be-8960-d6cd-7054-f0bc55a34787",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 1086506169
+   },
+   {
+    "id": "834b6966-dc85-0f94-ea6c-1a385cdec94a",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 61045466
+   }
+  ]
+ },
+ {
+  "uuid": "FwcpZJFmVnB+hJkWpgu3ww==",
+  "host": "training@example.com",
+  "date": "2026-01-13",
+  "topic": "Guest Expert Interview",
+  "drive_folder": "/training@example.com/2026-01-13 Guest Expert Interview",
+  "files": [
+   {
+    "id": "1f7d038a-8410-83c6-b1ff-4916df1246fa",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 2351082871
+   },
+   {
+    "id": "45bdec7c-5552-d5ac-d72d-c104513bef2b",
+    "recording_type": "active_speaker",
+    "file_type": "MP4",
+    "size": 2149313451
+   },
+   {
+    "id": "38e629d4-b676-cd8a-0344-a10a7f3fa784",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 2249918177
+   },
+   {
+    "id": "f4dd09b2-8171-c2d7-c3c9-7cc1c7f20bce",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 1377614215
+   },
+   {
+    "id": "ec4a4518-d0e7-fbf9-5998-ba1941807c7c",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 22383037
+   }
+  ]
+ },
+ {
+  "uuid": "18u19FIBkZyIofIO2Q84/Q==",
+  "host": "media@example.com",
+  "date": "2026-02-02",
+  "topic": "Weekly Team Q&A",
+  "drive_folder": "/media@example.com/2026-02-02 Weekly Team Q&A",
+  "files": [
+   {
+    "id": "e68d8b09-38ed-38c5-3598-8f5f5ac4d13c",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 1023577908
+   },
+   {
+    "id": "0e5a201a-e020-495e-305a-abe9efbff321",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1388303296
+   },
+   {
+    "id": "4fb52e50-b1b2-3e6d-825c-02ca7bb160f0",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 2273877552
+   },
+   {
+    "id": "f93a13fe-30d2-ddf3-5a56-af1a4bf5ab1d",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 1052155038
+   },
+   {
+    "id": "0eea7a7e-462d-01a6-d876-3354ba382f88",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 50319114
+   }
+  ]
+ },
+ {
+  "uuid": "Yvp5UNNDf6r2V0momGYvcA==",
+  "host": "archive@example.com",
+  "date": "2026-04-01",
+  "topic": "Quarterly Strategy Review",
+  "drive_folder": "/archive@example.com/2026-04-01 Quarterly Strategy Review",
+  "files": [
+   {
+    "id": "695295df-b7d4-09af-d447-0cdfb6064e51",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 699096129
+   },
+   {
+    "id": "fb65e103-d1c0-acac-170f-9ccfd1a5994c",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 649978988
+   },
+   {
+    "id": "66f32427-85df-6954-2fc3-107f496ff9bd",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 61191797
+   }
+  ]
+ },
+ {
+  "uuid": "M10KKtHh51hoSvYgC+zeyg==",
+  "host": "media@example.com",
+  "date": "2026-09-02",
+  "topic": "Member Onboarding Walkthrough",
+  "drive_folder": "/media@example.com/2026-09-02 Member Onboarding Walkthrough",
+  "files": [
+   {
+    "id": "6d61ee67-05e1-04fe-31a9-4780a4dfd71f",
+    "recording_type": "active_speaker",
+    "file_type": "MP4",
+    "size": 1616209777
+   },
+   {
+    "id": "c5055846-4ab2-a5c0-7b21-61faa376432b",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1020901135
+   },
+   {
+    "id": "f8f8818b-6856-1f74-1827-486262faecef",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 488037001
+   },
+   {
+    "id": "9f2c4688-d33f-038f-49aa-908477b01d10",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 1992374303
+   },
+   {
+    "id": "7f0e4ef8-c525-6e64-9b8e-bbfdb3003425",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 62051996
+   }
+  ]
+ },
+ {
+  "uuid": "DGoM20XEK9eObyfU1WRw6g==",
+  "host": "archive@example.com",
+  "date": "2026-11-17",
+  "topic": "Guest Expert Interview",
+  "drive_folder": "/archive@example.com/2026-11-17 Guest Expert Interview",
+  "files": [
+   {
+    "id": "4ddc9f14-0868-061f-ec97-482748c396e0",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 475596031
+   },
+   {
+    "id": "46556130-0235-40c1-42cb-d0c3453de960",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1256173304
+   },
+   {
+    "id": "99ba8247-ac00-a75e-9818-bfebf23ec189",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 717022823
+   },
+   {
+    "id": "e7cc4a91-e6d2-a7bf-ce57-8c1b9fbb0416",
+    "recording_type": "audio_only",
+    "file_type": "M4A",
+    "size": 34456059
+   }
+  ]
+ }
+]

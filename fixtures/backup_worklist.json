@@ -1,0 +1,90 @@
+[
+ {
+  "uuid": "H0J+tQvRB6jZ1QQX5UaKiQ==",
+  "meeting_id": 85018377755,
+  "host": "training@example.com",
+  "date": "2026-11-24",
+  "start_time": "2026-11-24T16:57:24Z",
+  "topic": "Weekly Team Q&A",
+  "missing_media": [
+   {
+    "id": "85da6794-9ea9-d0fc-01ce-801570d119f3",
+    "recording_type": "shared_screen",
+    "file_type": "MP4",
+    "size": 222251609
+   },
+   {
+    "id": "5c655595-33ba-8d6a-374c-bc5ff962037a",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1392737160
+   }
+  ]
+ },
+ {
+  "uuid": "cIM2i6iEQGF3nOd3qZc7Gw==",
+  "meeting_id": 84414798953,
+  "host": "archive@example.com",
+  "date": "2026-10-11",
+  "start_time": "2026-10-11T17:02:03Z",
+  "topic": "Weekly Team Q&A",
+  "missing_media": [
+   {
+    "id": "350ab004-370f-7522-6a63-09748f7cc9fe",
+    "recording_type": "active_speaker",
+    "file_type": "MP4",
+    "size": 684781481
+   },
+   {
+    "id": "eeabaa2c-6d1e-4aa3-b5fa-2a7dac84c684",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 382839671
+   }
+  ]
+ },
+ {
+  "uuid": "VgPzqxmKNhZu0MH0w/7FPA==",
+  "meeting_id": 80668060145,
+  "host": "training@example.com",
+  "date": "2026-12-08",
+  "start_time": "2026-12-08T17:05:40Z",
+  "topic": "Office Hours",
+  "missing_media": [
+   {
+    "id": "f741624e-c967-4a00-1dbc-6d2f4c709594",
+    "recording_type": "shared_screen_with_gallery_view",
+    "file_type": "MP4",
+    "size": 1104769924
+   },
+   {
+    "id": "fee04a20-d75d-1c55-4f42-e1c60151f774",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 2177629144
+   }
+  ]
+ },
+ {
+  "uuid": "k5ag4PrcFFZtD2q6N9eEnA==",
+  "meeting_id": 84726892195,
+  "host": "training@example.com",
+  "date": "2026-05-12",
+  "start_time": "2026-05-12T17:34:44Z",
+  "topic": "Member Onboarding Walkthrough",
+  "missing_media": [
+   {
+    "id": "95986647-3b8f-34d7-764a-29b28181afbd",
+    "recording_type": "shared_screen_with_speaker_view",
+    "file_type": "MP4",
+    "size": 648580853
+   },
+   {
+    "id": "a7bd0900-e8a8-6e91-8f3d-6472566f1867",
+    "recording_type": "gallery_view",
+    "file_type": "MP4",
+    "size": 1848867374
+   }
+  ]
+ }
+]
